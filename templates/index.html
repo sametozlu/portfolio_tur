@@ -9,19 +9,28 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link rel="stylesheet" href="../static/css/style.css" />
     <title>Portföy</title>
+    <style>
+      .footer__content {
+        display: none;
+        padding: 10px;
+        background-color: #f0f0f0;
+        margin-top: 10px;
+        border-radius: 5px;
+      }
+    </style>
   </head>
   <body>
     <header class="header">
       <nav class="header__nav main-nav">
         <ul class="main-nav__list main-list">
           <li class="main-list__item list-item">
-            <a class="list-item__link" href="#home">HOME</a>
+            <a class="list-item__link" href="#home">Ana Sayfa</a>
           </li>
           <li class="main-list__item list-item">
-            <a class="list-item__link" href="#about">ABOUT</a>
+            <a class="list-item__link" href="#about">Hakkımda</a>
           </li>
           <li class="main-list__item list-item">
-            <a class="list-item__link" href="#skills">MY SKILLS</a>
+            <a class="list-item__link" href="#skills">Özelliklerim</a>
           </li>
         </ul>
       </nav>
@@ -29,21 +38,23 @@
     <main class="main">
       <!-- Önizleme bölümü -->
       <section class="main__home home" id="home">
-        <h1 class="home__title">NAME SURNAME</h1>
-        <p class="home__subtitle">WEB-DEVELOPER, PYTHON PROGRAMMER</p>
+        <h1 class="home__title">Halil Samed ÖZLÜ</h1>
+        <p class="home__subtitle">Robot Mühendisi</p>
       </section>
       <!-- Hakkımda bölümü -->
       <section class="main__about about" id="about">
-        <h2 class="about__title">ABOUT ME</h2>
+        <h2 class="about__title">Benim Hakkımda Bilgiler</h2>
         <div class="about__info info-block">
           <p class="info-block__text">
-            Inform about me Inform about me Inform about me Inform about me
-            Inform about me Inform about me Inform about me Inform about me
-            Inform about me
+            Mustafa Umur Gökçe <br>
+            10 yaşında <br>
+            5.sınıf<br>
+            25 Temmuz 2014 doğumlu <br>
+            İzmir'de ikamet ediyor.
           </p>
           <img
             class="info-block__img"
-            src="../static/img/profile.png"
+            src="../static/img/resim.jpg"
             alt="me"
             width="250"
             height="250"
@@ -52,7 +63,7 @@
       </section>
       <!-- Beceriler bölümü -->
       <section class="main__skills skills" id="skills">
-        <h2 class="skills__title">MY SKILLS</h2>
+        <h2 class="skills__title">Özelliklerim</h2>
         <form action="/" method="POST">
           <ul class="skills__list skills-list">
             <li class="skills-list__skill skill">
@@ -63,7 +74,7 @@
                 width="150"
                 height="150"
               />
-              <span class="skill__info">Skill info</span>
+              <span class="skill__info">Özellik Bilgileri</span>
               <input class="skill__button" type="submit" name="button_python" value="SHOW PROJECT">
             </li>
             <li class="skills-list__skill skill">
@@ -101,7 +112,7 @@
             </li>
           </ul>
         </form>
-        {% if button_python%}
+        {% if button_python %}
           <div class="skills__project project" id="project">
               <img class="project__img" src="../static/img/python-project.png" alt="project" width="500">
               <a class="project__link" href="">GitHub'da aç</a>
@@ -110,21 +121,63 @@
       </section>
       <!-- Geri bildirim formu -->
       <section class="main__feedback feedback" id="feedback">
-        <h2 class="feedback__title">FEEDBACK</h2>
-        <form action="" method="POST" class="feedback__form form">
+        <h2 class="feedback__title">Geri Dönüş</h2>
+        <form action="/feedback" method="POST" class="feedback__form form">
           <label for="email">
-            <input type="email" class="form__input" name="email" id="email" placeholder="Введите E-mail" required>
+            <input type="email" class="form__input" name="email" id="email" placeholder="E-posta adresinizi girin" required>
           </label>
           <label for="text">
-            <textarea name="text" class="form__input" id="text" cols="70" rows="10" required placeholder="Comment"></textarea>
+            <textarea name="text" class="form__input" id="text" cols="70" rows="10" required placeholder="Yorumunuzu yazın"></textarea>
           </label>
           <button class="form__button" type="submit">SEND</button>
         </form>
       </section>
+      <!-- Sosyal medya bağlantıları için bir alt bilgi -->
+      <footer class="footer">
+        <ul class="footer__social social-list">
+          <li class="social-list__item">
+            <a href="https://www.instagram.com/" target="_blank" class="social-list__link" onclick="toggleContent('instagram')">
+              Instagram
+            </a>
+            <div class="footer__content" id="instagram">
+              <p>Instagram'da beni takip et!</p>
+            </div>
+          </li>
+          <li class="social-list__item">
+            <a href="https://www.linkedin.com/" target="_blank" class="social-list__link" onclick="toggleContent('linkedin')">
+              LinkedIn
+            </a>
+            <div class="footer__content" id="linkedin">
+              <p>LinkedIn profilime göz atın!</p>
+            </div>
+          </li>
+          <li class="social-list__item">
+            <a href="https://github.com/" target="_blank" class="social-list__link" onclick="toggleContent('github')">
+              GitHub
+            </a>
+            <div class="footer__content" id="github">
+              <p>GitHub hesabımı inceleyin.</p>
+            </div>
+          </li>
+        </ul>
+      </footer>
     </main>
-    <!-- Sosyal medya bağlantıları için bir alt bilgi -->
-    <footer>
-
-    </footer>
+    <script>
+      function toggleContent(platform) {
+        var content = document.getElementById(platform);
+        // Eğer içerik zaten görünüyorsa gizle
+        if (content.style.display === "block") {
+          content.style.display = "none";
+        } else {
+          // Diğer içerikleri gizle
+          var contents = document.querySelectorAll(".footer__content");
+          contents.forEach(function (item) {
+            item.style.display = "none";
+          });
+          // Tıklanan platformun içeriğini göster
+          content.style.display = "block";
+        }
+      }
+    </script>
   </body>
 </html>
